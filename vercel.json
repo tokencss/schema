@@ -1,0 +1,9 @@
+{
+    "redirects": [
+        {
+            "source": "/",
+            "destination": "/schema.json",
+            "permanent": false
+        }
+    ]
+}
