@@ -2,7 +2,12 @@
     "redirects": [
         {
             "source": "/",
-            "destination": "/schema.json",
+            "destination": "/v/0.0.1/schema.json",
+            "permanent": false
+        },
+        {
+            "source": "/v/:number",
+            "destination": "/v/:number/schema.json",
             "permanent": false
         }
     ]
