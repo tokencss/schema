@@ -142,12 +142,14 @@
       "number": {
         "$id": "#/$defs/values/number",
         "title": "The number value",
-        "oneOf": [{ "type": "integer" }, { "type": "number" }]
+        "type": "number"
       },
       "numberClamped": {
         "$id": "#/$defs/values/numberClamped",
         "title": "The number value",
-        "oneOf": [{ "type": "integer", "min": 0, "max": 1 }, { "type": "number", "min": 0.0, "max": 1.0 }]
+        "type": "number",
+        "min": 0.0,
+        "max": 1.0
       }
     },
     "tokens": {
