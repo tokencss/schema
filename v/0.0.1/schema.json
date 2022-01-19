@@ -25,7 +25,12 @@
         },
         "else": {
           "type": "object",
-          "properties": {
+          "not": {
+            "properties": {
+              "value": { "type": "string" }
+            }
+          },
+          "additionalProperties": {
             "$ref": "#/$defs/wrappers/color"
           }
         }
