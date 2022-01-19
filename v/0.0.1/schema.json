@@ -75,6 +75,14 @@
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
       }
+    },
+    "timing-function": {
+      "properties": {
+        "type": { "enum": ["cubic-bezier"], "default": "cubic-bezier" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/cubic-bezier"
+      }
     }
   },
   "$defs": {
