@@ -120,22 +120,22 @@
       "type": "object",
       "if": {
         "properties": {
-          "value": true
+          "value": false
         }
       },
       "then": {
-        "$ref": "#/definitions/tokens/font"
+        "type": "object",
+        "properties": {
+          "value": false
+        },
+        "patternProperties": {
+          "[\\{\\}\\.]*": false,
+          "[^\\{\\}\\.]*": { "$ref": "#/definitions/recursive-font" }
+        },
+        "additionalProperties": false
       },
       "else": {
-        "type": "object",
-          "properties": {
-            "value": false
-          },
-          "patternProperties": {
-            "[\\{\\}\\.]*": false,
-            "[^\\{\\}\\.]*": { "$ref": "#/definitions/recursive-font" }
-          },
-          "additionalProperties": false
+        "$ref": "#/definitions/tokens/font"
       }
     },
     "values": {
