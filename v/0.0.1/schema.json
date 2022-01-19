@@ -118,7 +118,7 @@
     "recursive-font": {
       "$id": "#/definitions/recursive-font",
       "type": "object",
-      "allOf": [
+      "oneOf": [
         {
           "if": {
             "properties": { "value": true }
