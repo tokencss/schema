@@ -1,11 +1,16 @@
 {
   "$id": "https://tokencss.com/schema.json",
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Token Config",
   "type": "object",
   "properties": {
     "color": {
-      "type": { "ref": "#/$defs/tokens/color" }
+      "properties": {
+        "type": { "enum": ["color"], "default": "color" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/values/color"
+      }
     }
   },
   "$defs": {
@@ -40,7 +45,7 @@
         "required": ["value"],
         "properties": {
           "type": { "enum": ["color"], "default": "color" },
-          "value": { "$ref": "#/$defs/values/color" }
+          "value": { "$ref": "#/$defs/values/color", "required": true }
         }
       },
       "cubic-bezier": {
