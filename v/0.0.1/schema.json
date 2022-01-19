@@ -119,23 +119,20 @@
       "$id": "#/definitions/recursive-font",
       "type": "object",
       "if": {
-        "properties": {
-          "value": false
-        }
+        "properties": { "value": true }
       },
       "then": {
+        "$ref": "#/definitions/tokens/font",
+        "required": ["value"]
+      },
+      "else": {
         "type": "object",
-        "properties": {
-          "value": false
-        },
+        "properties": { "value": false },
         "patternProperties": {
           "[\\{\\}\\.]*": false,
           "[^\\{\\}\\.]*": { "$ref": "#/definitions/recursive-font" }
         },
         "additionalProperties": false
-      },
-      "else": {
-        "$ref": "#/definitions/tokens/font"
       }
     },
     "values": {
