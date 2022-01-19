@@ -106,9 +106,26 @@
       "additionalProperties": {
         "$ref": "#/definitions/tokens/media"
       }
+    },
+    "test": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/recursive-font"
+      }
     }
   },
   "definitions": {
+    "recursive-font": {
+      "$id": "#/definitions/recursive-font",
+      "oneOf": [{
+        "$ref": "#/definitions/values/font"
+      }, {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/definitions/recursive-font"
+        }
+      }]
+    },
     "values": {
       "extensions": {
         "$id": "#/definitions/values/extensions",
