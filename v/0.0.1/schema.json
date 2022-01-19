@@ -6,7 +6,7 @@
   "properties": {
     "color": {
       "properties": {
-        "type": { "enum": ["color"], "default": "color" }
+        "type": { "const": "color" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/color"
@@ -14,7 +14,7 @@
     },
     "space": {
       "properties": {
-        "type": { "enum": ["dimension"], "default": "dimension" }
+        "type": { "const": "dimension" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -22,7 +22,7 @@
     },
     "size": {
       "properties": {
-        "type": { "enum": ["dimension"], "default": "dimension" }
+        "type": { "const": "dimension" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -30,7 +30,7 @@
     },
     "width": {
       "properties": {
-        "type": { "enum": ["dimension"], "default": "dimension" }
+        "type": { "const": "dimension" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -38,7 +38,7 @@
     },
     "height": {
       "properties": {
-        "type": { "enum": ["dimension"], "default": "dimension" }
+        "type": { "const": "dimension" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -46,7 +46,7 @@
     },
     "radius": {
       "properties": {
-        "type": { "enum": ["dimension"], "default": "dimension" }
+        "type": { "const": "dimension" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -54,7 +54,7 @@
     },
     "shadow": {
       "properties": {
-        "type": { "enum": ["shadow"], "default": "shadow" }
+        "type": { "const": "shadow" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/shadow"
@@ -62,7 +62,7 @@
     },
     "font": {
       "properties": {
-        "type": { "enum": ["font"], "default": "font" }
+        "type": { "const": "font" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/font"
@@ -70,7 +70,7 @@
     },
     "font-size": {
       "properties": {
-        "type": { "enum": ["dimension"], "default": "dimension" }
+        "type": { "const": "dimension" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -78,10 +78,18 @@
     },
     "timing-function": {
       "properties": {
-        "type": { "enum": ["cubic-bezier"], "default": "cubic-bezier" }
+        "type": { "const": "cubic-bezier" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/cubic-bezier"
+      }
+    },
+    "media": {
+      "properties": {
+        "type": { "const": "media" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/media"
       }
     }
   },
@@ -104,6 +112,11 @@
         "items": {
           "type": "string"
         }
+      },
+      "media": {
+        "$id": "#/$defs/values/media",
+        "title": "A media query value",
+        "pattern": "(^\\(.*\\)$|^\\{.*\\}$)"
       },
       "shadow": {
         "$id": "#/$defs/values/shadow",
@@ -154,14 +167,27 @@
       }
     },
     "tokens": {
+      "media": {
+        "font": {
+          "$id": "#/$defs/tokens/media",
+          "type": "object",
+          "required": ["value"],
+          "properties": {
+            "type": { "const": "media" },
+            "value": { "$ref": "#/$defs/values/media" },
+            "extensions": { "type": "object" }
+          },
+          "additionalProperties": false
+        }
+      },
       "font": {
         "$id": "#/$defs/tokens/font",
         "type": "object",
         "required": ["value"],
         "properties": {
-          "type": { "enum": ["font"], "default": "font" },
+          "type": { "const": "font" },
           "value": { "$ref": "#/$defs/values/font" },
-          "extensions": { "$ref": "#/$defs/values/extensions" }
+          "extensions": { "type": "object" }
         },
         "additionalProperties": false
       },
@@ -170,9 +196,9 @@
         "type": "object",
         "required": ["value"],
         "properties": {
-          "type": { "enum": ["color"], "default": "color" },
+          "type": { "consts": "color" },
           "value": { "$ref": "#/$defs/values/color" },
-          "extensions": { "$ref": "#/$defs/values/extensions" }
+          "extensions": { "type": "object" }
         },
         "additionalProperties": false
       },
@@ -181,7 +207,7 @@
         "type": "object",
         "required": ["value"],
         "properties": {
-          "type": { "enum": ["dimension"], "default": "dimension" },
+          "type": { "const": "dimension" },
           "value": { "$ref": "#/$defs/values/dimension" },
           "extensions": { "$ref": "#/$defs/values/extensions" }
         },
@@ -192,7 +218,7 @@
         "type": "object",
         "required": ["value"],
         "properties": {
-          "type": { "enum": ["shadow"], "default": "shadow" },
+          "type": { "const": "shadow" },
           "value": {
             "oneOf": [
               { "$ref": "#/$defs/values/shadow" },
@@ -204,7 +230,7 @@
               }
             ]
           },
-          "extensions": { "$ref": "#/$defs/values/extensions" }
+          "extensions": { "type": "object" }
         },
         "additionalProperties": false
       },
@@ -213,9 +239,9 @@
         "type": "object",
         "required": ["value"],
         "properties": {
-          "type": { "enum": ["cubic-bezier"], "default": "cubic-bezier" },
+          "type": { "const": "cubic-bezier" },
           "value": { "$ref": "#/$defs/values/cubic-bezier" },
-          "extensions": { "$ref": "#/$defs/values/extensions" }
+          "extensions": { "type": "object" }
         }
       },
       "number": {
@@ -224,7 +250,7 @@
         "required": ["value"],
         "properties": {
           "value": { "$ref": "#/$defs/values/number" },
-          "extensions": { "$ref": "#/$defs/values/extensions" }
+          "extensions": { "type": "object" }
         }
       }
     }
