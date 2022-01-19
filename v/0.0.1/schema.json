@@ -17,20 +17,22 @@
     "wrappers": {
       "color": {
         "$id": "#/$defs/wrappers/color",
-        "if": {
-          "not": {
-            "value": { "type": "string" }
+        "anyOf": [
+          {
+            "type": "object",
+            "not": {
+              "properties": {
+                "value": "string"
+              }
+            },
+            "additionalProperties": {
+              "$ref": "#/$defs/wrappers/color"
+            }
+          },
+          {
+            "$ref": "#/$defs/values/color"
           }
-        },
-        "then": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/$defs/wrappers/color"
-          }
-        },
-        "else": {
-          "$ref": "#/$defs/values/color"
-        }
+        ]
       }
     },
     "values": {
