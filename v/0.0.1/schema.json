@@ -10,11 +10,14 @@
         "extensions": { "type": "object" }
       },
       "additionalProperties": {
-        "anyOf": [{
-          "type": "object"
-        }, {
-          "$ref": "#/definitions/tokens/color"
-        }]
+        "anyOf": [
+          {
+            "type": "object"
+          },
+          {
+            "$ref": "#/definitions/tokens/color"
+          }
+        ]
       }
     },
     "space": {
@@ -117,14 +120,17 @@
   "definitions": {
     "recursive-font": {
       "$id": "#/definitions/recursive-font",
-      "oneOf": [{
-        "$ref": "#/definitions/tokens/font"
-      }, {
-        "type": "object",
-        "additionalProperties": {
-          "$ref": "#/definitions/recursive-font"
+      "oneOf": [
+        {
+          "$ref": "#/definitions/tokens/font"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/recursive-font"
+          }
         }
-      }]
+      ]
     },
     "values": {
       "extensions": {
@@ -202,19 +208,18 @@
     },
     "tokens": {
       "token": {
-          "$id": "#/definitions/tokens/token",
-          "type": "object",
-          "required": ["value"],
-          "oneOf": [
-            { "$ref": "#/definitions/tokens/media" },
-            { "$ref": "#/definitions/tokens/font" },
-            { "$ref": "#/definitions/tokens/color" },
-            { "$ref": "#/definitions/tokens/dimension" },
-            { "$ref": "#/definitions/tokens/shadow" },
-            { "$ref": "#/definitions/tokens/cubic-bezier" },
-            { "$ref": "#/definitions/tokens/number" }
-          ]
-        }
+        "$id": "#/definitions/tokens/token",
+        "type": "object",
+        "required": ["value"],
+        "oneOf": [
+          { "$ref": "#/definitions/tokens/media" },
+          { "$ref": "#/definitions/tokens/font" },
+          { "$ref": "#/definitions/tokens/color" },
+          { "$ref": "#/definitions/tokens/dimension" },
+          { "$ref": "#/definitions/tokens/shadow" },
+          { "$ref": "#/definitions/tokens/cubic-bezier" },
+          { "$ref": "#/definitions/tokens/number" }
+        ]
       },
       "media": {
         "$id": "#/definitions/tokens/media",
