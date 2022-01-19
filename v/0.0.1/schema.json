@@ -18,14 +18,24 @@
       "color": {
         "$id": "#/$defs/wrappers/color",
         "additionalProperties": {
-          "oneOf": [{
-            "$ref": "#/$defs/values/color"
-          }, {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/$defs/wrappers/color"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/values/color"
+            },
+            {
+              "type": "object",
+              "not": {
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": {
+                "$ref": "#/$defs/wrappers/color"
+              }
             }
-          }]
+          ]
         }
       }
     },
@@ -34,12 +44,15 @@
         "$id": "#/$defs/values/color",
         "description": "The value must be a string containing a hex triplet/quartet including the preceding # character",
         "title": "The color value",
+        "required": ["value"],
         "properties": {
           "value": {
             "examples": ["#FFF", "#FF0000"],
             "pattern": "^#[0-9a-fA-F]{3,6}",
-            "type": "string",
-            "required": true
+            "type": "string"
+          },
+          "extensions": {
+            "type": "object"
           }
         }
       },
@@ -51,10 +64,7 @@
         "minItems": 4,
         "maxItems": 4,
         "items": {
-          "anyOf": [
-            { "type": "integer" },
-            { "type": "number" }
-          ]
+          "anyOf": [{ "type": "integer" }, { "type": "number" }]
         }
       }
     },
