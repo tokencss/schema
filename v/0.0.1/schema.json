@@ -1,6 +1,6 @@
 {
   "$id": "https://tokencss.com/schema.json",
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-05/schema#",
   "title": "Token Config",
   "type": "object",
   "properties": {
@@ -122,18 +122,17 @@
       "$id": "#/definitions/recursive-font",
       "oneOf": [
         {
+          "$ref": "#/definitions/tokens/font",
           "type": "object",
+          "required": ["value"],
           "properties": {
-            "value": { "type": "string" }
-          },
-          "$ref": "#/definitions/tokens/font"
+            "value": { "type": "array" }
+          }
         },
         {
           "type": "object",
-          "not": {
-            "properties": {
-              "value": { "type": "string" }
-            }
+          "properties": {
+            "value": false
           },
           "additionalProperties": {
             "$ref": "#/definitions/recursive-font"
