@@ -18,21 +18,18 @@
       "color": {
         "$id": "#/$defs/wrappers/color",
         "if": {
-          "value": { "type": "string" }
+          "not": {
+            "value": { "type": "string" }
+          }
         },
         "then": {
-          "$ref": "#/$defs/values/color"
-        },
-        "else": {
           "type": "object",
-          "not": {
-            "properties": {
-              "value": { "type": "string" }
-            }
-          },
           "additionalProperties": {
             "$ref": "#/$defs/wrappers/color"
           }
+        },
+        "else": {
+          "$ref": "#/$defs/values/color"
         }
       }
     },
@@ -51,7 +48,8 @@
           "extensions": {
             "type": "object"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "cubic-bezier": {
         "$id": "#/$defs/values/cubic-bezier",
