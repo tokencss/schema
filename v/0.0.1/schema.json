@@ -17,16 +17,16 @@
     "wrappers": {
       "color": {
         "$id": "#/$defs/wrappers/color",
+        "not": {
+          "properties": {
+            "value": { "type": "string" }
+          }
+        },
         "anyOf": [
           {
             "type": "object",
-            "not": {
-              "properties": {
-                "value": "string"
-              }
-            },
             "patternProperties": {
-              "[^\\{\\}\\.]": { 
+              "^[^\\{\\}\\.]+$": { 
                 "$ref": "#/$defs/wrappers/color"
               }
             }
