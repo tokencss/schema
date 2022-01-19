@@ -8,13 +8,6 @@
       "properties": {
         "type": { "enum": ["color"], "default": "color" }
       },
-      "not": {
-        "patternProperties": {
-          "[\\{\\}\\.]": {
-            "anyOf": [{ "type": "string" }, { "type": "object" }]
-          }
-        }
-      },
       "additionalProperties": {
         "$ref": "#/$defs/wrappers/color"
       }
@@ -23,6 +16,8 @@
   "$defs": {
     "wrappers": {
       "color": {
+        "title": "Color",
+        "description": "A color!",
         "$id": "#/$defs/wrappers/color",
         "anyOf": [
           {
