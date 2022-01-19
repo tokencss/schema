@@ -20,19 +20,9 @@
         "anyOf": [
           {
             "type": "object",
-            "not": {
-              "properties": {
-                "value": "string",
-                "extensions": "object"
-              }
-            },
             "$ref": "#/$defs/wrappers/color"
           },
           {
-            "properties": {
-              "value": "string",
-              "extensions": "object"
-            },
             "$ref": "#/$defs/values/color"
           }
         ]
