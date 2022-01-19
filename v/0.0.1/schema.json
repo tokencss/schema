@@ -18,14 +18,16 @@
       "color": {
         "$id": "#/$defs/wrappers/color",
         "if": {
+          "properties": {
+            "value": { "type": "string" }
+          }
+        },
+        "then": {
           "$ref": "#/$defs/values/color"
         },
         "else": {
           "type": "object",
           "properties": {
-            "not": {
-              "value": "string"
-            },
             "$ref": "#/$defs/wrappers/color"
           }
         }
