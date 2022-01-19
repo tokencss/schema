@@ -10,52 +10,56 @@
         "extensions": { "type": "object" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/color"
+        "anyOf": [{
+          "type": "object"
+        }, {
+          "$ref": "#/definitions/tokens/color"
+        }]
       }
     },
     "space": {
       "properties": {
         "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/$defs/values/extensions" }
+        "extensions": { "$ref": "#/definitions/values/extensions" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/dimension"
+        "$ref": "#/definitions/tokens/dimension"
       }
     },
     "size": {
       "properties": {
         "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/$defs/values/extensions" }
+        "extensions": { "$ref": "#/definitions/values/extensions" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/dimension"
+        "$ref": "#/definitions/tokens/dimension"
       }
     },
     "width": {
       "properties": {
         "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/$defs/values/extensions" }
+        "extensions": { "$ref": "#/definitions/values/extensions" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/dimension"
+        "$ref": "#/definitions/tokens/dimension"
       }
     },
     "height": {
       "properties": {
         "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/$defs/values/extensions" }
+        "extensions": { "$ref": "#/definitions/values/extensions" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/dimension"
+        "$ref": "#/definitions/tokens/dimension"
       }
     },
     "radius": {
       "properties": {
         "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/$defs/values/extensions" }
+        "extensions": { "$ref": "#/definitions/values/extensions" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/dimension"
+        "$ref": "#/definitions/tokens/dimension"
       }
     },
     "shadow": {
@@ -64,7 +68,7 @@
         "extensions": { "type": "object" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/shadow"
+        "$ref": "#/definitions/tokens/shadow"
       }
     },
     "font": {
@@ -73,16 +77,16 @@
         "extensions": { "type": "object" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/font"
+        "$ref": "#/definitions/tokens/font"
       }
     },
     "font-size": {
       "properties": {
         "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/$defs/values/extensions" }
+        "extensions": { "$ref": "#/definitions/values/extensions" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/dimension"
+        "$ref": "#/definitions/tokens/dimension"
       }
     },
     "timing-function": {
@@ -91,7 +95,7 @@
         "extensions": { "type": "object" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/cubic-bezier"
+        "$ref": "#/definitions/tokens/cubic-bezier"
       }
     },
     "media": {
@@ -100,14 +104,14 @@
         "extensions": { "type": "object" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/tokens/media"
+        "$ref": "#/definitions/tokens/media"
       }
     }
   },
-  "$defs": {
+  "definitions": {
     "values": {
       "extensions": {
-        "$id": "#/$defs/values/extensions",
+        "$id": "#/definitions/values/extensions",
         "title": "The extensions value",
         "type": "object",
         "properties": {
@@ -117,7 +121,7 @@
         }
       },
       "font": {
-        "$id": "#/$defs/values/font",
+        "$id": "#/definitions/values/font",
         "title": "The font value",
         "type": "array",
         "items": {
@@ -125,52 +129,52 @@
         }
       },
       "media": {
-        "$id": "#/$defs/values/media",
+        "$id": "#/definitions/values/media",
         "title": "A media query value",
         "pattern": "(^\\(.*\\)$|^\\{.*\\}$)"
       },
       "shadow": {
-        "$id": "#/$defs/values/shadow",
+        "$id": "#/definitions/values/shadow",
         "title": "The shadow value",
         "type": "object",
         "properties": {
-          "offset-x": { "$ref": "#/$defs/values/dimension" },
-          "offset-y": { "$ref": "#/$defs/values/dimension" },
-          "blur": { "$ref": "#/$defs/values/dimension" },
-          "spread": { "$ref": "#/$defs/values/dimension" },
-          "color": { "$ref": "#/$defs/values/color" },
-          "opacity": { "$ref": "#/$defs/values/numberClamped" }
+          "offset-x": { "$ref": "#/definitions/values/dimension" },
+          "offset-y": { "$ref": "#/definitions/values/dimension" },
+          "blur": { "$ref": "#/definitions/values/dimension" },
+          "spread": { "$ref": "#/definitions/values/dimension" },
+          "color": { "$ref": "#/definitions/values/color" },
+          "opacity": { "$ref": "#/definitions/values/numberClamped" }
         },
         "additionalProperties": false
       },
       "dimension": {
-        "$id": "#/$defs/values/dimension",
+        "$id": "#/definitions/values/dimension",
         "title": "The dimension value",
         "type": "string",
         "pattern": "((px|rem)$|^\\{.*\\})$"
       },
       "color": {
-        "$id": "#/$defs/values/color",
+        "$id": "#/definitions/values/color",
         "description": "The value must be a string containing a hex triplet/quartet including the preceding # character",
         "title": "The color value",
         "pattern": "(^#[0-9a-fA-F]{3,6}|^\\{.*\\}$)"
       },
       "cubic-bezier": {
-        "$id": "#/$defs/values/cubic-bezier",
+        "$id": "#/definitions/values/cubic-bezier",
         "title": "The cubic-bezier value",
         "minItems": 4,
         "maxItems": 4,
         "items": {
-          "$ref": "#/$defs/values/numberClamped"
+          "$ref": "#/definitions/values/numberClamped"
         }
       },
       "number": {
-        "$id": "#/$defs/values/number",
+        "$id": "#/definitions/values/number",
         "title": "The number value",
         "type": "number"
       },
       "numberClamped": {
-        "$id": "#/$defs/values/numberClamped",
+        "$id": "#/definitions/values/numberClamped",
         "title": "The number value",
         "type": "number",
         "minimum": 0,
@@ -178,62 +182,77 @@
       }
     },
     "tokens": {
+      "token": {
+          "$id": "#/definitions/tokens/token",
+          "type": "object",
+          "required": ["value"],
+          "oneOf": [
+            { "$ref": "#/definitions/tokens/media" },
+            { "$ref": "#/definitions/tokens/font" },
+            { "$ref": "#/definitions/tokens/color" },
+            { "$ref": "#/definitions/tokens/dimension" },
+            { "$ref": "#/definitions/tokens/shadow" },
+            { "$ref": "#/definitions/tokens/cubic-bezier" },
+            { "$ref": "#/definitions/tokens/number" }
+          ]
+        }
+      },
       "media": {
-        "$id": "#/$defs/tokens/media",
+        "$id": "#/definitions/tokens/media",
         "type": "object",
         "required": ["value"],
         "properties": {
           "type": { "const": "media" },
-          "value": { "$ref": "#/$defs/values/media" },
+          "value": { "$ref": "#/definitions/values/media" },
           "extensions": { "type": "object" }
         },
         "additionalProperties": false
       },
       "font": {
-        "$id": "#/$defs/tokens/font",
+        "$id": "#/definitions/tokens/font",
         "type": "object",
         "required": ["value"],
         "properties": {
           "type": { "const": "font" },
-          "value": { "$ref": "#/$defs/values/font" },
+          "value": { "$ref": "#/definitions/values/font" },
           "extensions": { "type": "object" }
         },
         "additionalProperties": false
       },
       "color": {
-        "$id": "#/$defs/tokens/color",
+        "$id": "#/definitions/tokens/color",
         "type": "object",
         "required": ["value"],
         "properties": {
           "type": { "consts": "color" },
-          "value": { "$ref": "#/$defs/values/color" },
+          "value": { "$ref": "#/definitions/values/color" },
           "extensions": { "type": "object" }
         },
         "additionalProperties": false
       },
       "dimension": {
-        "$id": "#/$defs/tokens/dimension",
+        "$id": "#/definitions/tokens/dimension",
         "type": "object",
         "required": ["value"],
         "properties": {
           "type": { "const": "dimension" },
-          "value": { "$ref": "#/$defs/values/dimension" },
-          "extensions": { "$ref": "#/$defs/values/extensions" }
+          "value": { "$ref": "#/definitions/values/dimension" },
+          "extensions": { "$ref": "#/definitions/values/extensions" }
         },
         "additionalProperties": false
       },
       "shadow": {
-        "$id": "#/$defs/tokens/shadow",
+        "$id": "#/definitions/tokens/shadow",
         "type": "object",
         "required": ["value"],
         "properties": {
           "type": { "const": "shadow" },
           "value": {
             "oneOf": [
-              { "$ref": "#/$defs/values/shadow" },
+              { "$ref": "#/definitions/values/shadow" },
               {
                 "type": "array",
-                "items": { "$ref": "#/$defs/values/shadow" },
+                "items": { "$ref": "#/definitions/values/shadow" },
                 "minItems": 1,
                 "additionalItems": false
               }
@@ -244,21 +263,21 @@
         "additionalProperties": false
       },
       "cubic-bezier": {
-        "$id": "#/$defs/tokens/cubic-bezier",
+        "$id": "#/definitions/tokens/cubic-bezier",
         "type": "object",
         "required": ["value"],
         "properties": {
           "type": { "const": "cubic-bezier" },
-          "value": { "$ref": "#/$defs/values/cubic-bezier" },
+          "value": { "$ref": "#/definitions/values/cubic-bezier" },
           "extensions": { "type": "object" }
         }
       },
       "number": {
-        "$id": "#/$defs/tokens/number",
+        "$id": "#/definitions/tokens/number",
         "type": "object",
         "required": ["value"],
         "properties": {
-          "value": { "$ref": "#/$defs/values/number" },
+          "value": { "$ref": "#/definitions/values/number" },
           "extensions": { "type": "object" }
         }
       }
