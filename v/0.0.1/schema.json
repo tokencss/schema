@@ -9,45 +9,111 @@
         "type": { "enum": ["color"], "default": "color" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/wrappers/color"
+        "$ref": "#/$defs/tokens/color"
+      }
+    },
+    "space": {
+      "properties": {
+        "type": { "enum": ["dimension"], "default": "dimension" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/dimension"
+      }
+    },
+    "size": {
+      "properties": {
+        "type": { "enum": ["dimension"], "default": "dimension" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/dimension"
+      }
+    },
+    "width": {
+      "properties": {
+        "type": { "enum": ["dimension"], "default": "dimension" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/dimension"
+      }
+    },
+    "height": {
+      "properties": {
+        "type": { "enum": ["dimension"], "default": "dimension" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/dimension"
+      }
+    },
+    "radius": {
+      "properties": {
+        "type": { "enum": ["dimension"], "default": "dimension" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/dimension"
+      }
+    },
+    "shadow": {
+      "properties": {
+        "type": { "enum": ["shadow"], "default": "shadow" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/shadow"
+      }
+    },
+    "font": {
+      "properties": {
+        "type": { "enum": ["font"], "default": "font" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/font"
+      }
+    },
+    "font-size": {
+      "properties": {
+        "type": { "enum": ["dimension"], "default": "dimension" }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tokens/dimension"
       }
     }
   },
   "$defs": {
-    "wrappers": {
-      "color": {
-        "title": "Color",
-        "description": "A color!",
-        "$id": "#/$defs/wrappers/color",
-        "anyOf": [
-          {
-            "$ref": "#/$defs/values/color"
-          }
-        ]
-      }
-    },
     "values": {
+      "font": {
+        "$id": "#/$defs/values/font",
+        "title": "The font value",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "shadow": {
+        "$id": "#/$defs/values/shadow",
+        "title": "The shadow value",
+        "type": "object",
+        "properties": {
+          "offset-x": { "$ref": "#/$defs/values/dimension" },
+          "offset-y": { "$ref": "#/$defs/values/dimension" },
+          "blur": { "$ref": "#/$defs/values/dimension" },
+          "spread": { "$ref": "#/$defs/values/dimension" },
+          "color": { "$ref": "#/$defs/values/color" }
+        },
+        "additionalProperties": false
+      },
+      "dimension": {
+        "$id": "#/$defs/values/dimension",
+        "title": "The dimension value",
+        "type": "string",
+        "pattern": "((px|rem)$|^\\{.*\\})$"
+      },
       "color": {
         "$id": "#/$defs/values/color",
         "description": "The value must be a string containing a hex triplet/quartet including the preceding # character",
         "title": "The color value",
-        "required": ["value"],
-        "properties": {
-          "value": {
-            "examples": ["#FFF", "#FF0000"],
-            "pattern": "^#[0-9a-fA-F]{3,6}",
-            "type": "string"
-          },
-          "extensions": {
-            "type": "object"
-          }
-        },
-        "additionalProperties": false
+        "pattern": "(^#[0-9a-fA-F]{3,6}|^\\{.*\\}$)"
       },
       "cubic-bezier": {
         "$id": "#/$defs/values/cubic-bezier",
-        "description": "The value must be a string containing a hex triplet/quartet including the preceding # character",
-        "examples": [[0, 0, 0, 1]],
         "title": "The cubic-bezier value",
         "minItems": 4,
         "maxItems": 4,
@@ -57,14 +123,49 @@
       }
     },
     "tokens": {
+      "font": {
+        "$id": "#/$defs/tokens/font",
+        "type": "object",
+        "required": ["value"],
+        "properties": {
+          "type": { "enum": ["font"], "default": "font" },
+          "value": { "$ref": "#/$defs/values/font" },
+          "extensions": { "type": "object" }
+        },
+        "additionalProperties": false
+      },
       "color": {
         "$id": "#/$defs/tokens/color",
         "type": "object",
         "required": ["value"],
         "properties": {
           "type": { "enum": ["color"], "default": "color" },
-          "value": { "$ref": "#/$defs/values/color", "required": true }
-        }
+          "value": { "$ref": "#/$defs/values/color" },
+          "extensions": { "type": "object" }
+        },
+        "additionalProperties": false
+      },
+      "dimension": {
+        "$id": "#/$defs/tokens/dimension",
+        "type": "object",
+        "required": ["value"],
+        "properties": {
+          "type": { "enum": ["dimension"], "default": "dimension" },
+          "value": { "$ref": "#/$defs/values/dimension" },
+          "extensions": { "type": "object" }
+        },
+        "additionalProperties": false
+      },
+      "shadow": {
+        "$id": "#/$defs/tokens/shadow",
+        "type": "object",
+        "required": ["value"],
+        "properties": {
+          "type": { "enum": ["shadow"], "default": "shadow" },
+          "value": { "$ref": "#/$defs/values/shadow" },
+          "extensions": { "type": "object" }
+        },
+        "additionalProperties": false
       },
       "cubic-bezier": {
         "$id": "#/$defs/tokens/cubic-bezier",
