@@ -192,7 +192,17 @@
         "required": ["value"],
         "properties": {
           "type": { "enum": ["shadow"], "default": "shadow" },
-          "value": { "$ref": "#/$defs/values/shadow" },
+          "value": {
+            "oneOf": [
+              { "$ref": "#/$defs/values/shadow" },
+              {
+                "type": "array",
+                "items": { "$ref": "#/$defs/values/shadow" },
+                "minItems": 1,
+                "additionalItems": false
+              }
+            ]
+          },
           "extensions": { "$ref": "#/$defs/values/extensions" }
         },
         "additionalProperties": false
