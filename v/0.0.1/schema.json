@@ -19,11 +19,10 @@
         "$id": "#/$defs/wrappers/color",
         "if": {
           "properties": {
-            "$ref": "#/$defs/values/color"
+            "value": {
+              "$ref": "#/$defs/values/color"
+            }
           }
-        },
-        "then": {
-          "required": ["value"]
         },
         "else": {
           "type": "object",
