@@ -17,11 +17,6 @@
     "wrappers": {
       "color": {
         "$id": "#/$defs/wrappers/color",
-        "patternProperties": {
-          "^[^\\{\\}\\.]+$": {
-            "$ref": "#/$defs/wrappers/color"
-          }
-        },
         "anyOf": [
           {
             "type": "object",
