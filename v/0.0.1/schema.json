@@ -118,7 +118,7 @@
     "recursive-font": {
       "$id": "#/definitions/recursive-font",
       "oneOf": [{
-        "$ref": "#/definitions/values/font"
+        "$ref": "#/definitions/tokens/font"
       }, {
         "type": "object",
         "additionalProperties": {
@@ -143,7 +143,9 @@
         "type": "array",
         "items": {
           "type": "string"
-        }
+        },
+        "minItems": 1,
+        "uniqueItems": true
       },
       "media": {
         "$id": "#/definitions/values/media",
