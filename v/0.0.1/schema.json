@@ -6,7 +6,8 @@
   "properties": {
     "color": {
       "properties": {
-        "type": { "const": "color" }
+        "type": { "const": "color" },
+        "extensions": { "type": "object" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/color"
@@ -14,7 +15,8 @@
     },
     "space": {
       "properties": {
-        "type": { "const": "dimension" }
+        "type": { "const": "dimension" },
+        "extensions": { "$ref": "#/$defs/values/extensions" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -22,7 +24,8 @@
     },
     "size": {
       "properties": {
-        "type": { "const": "dimension" }
+        "type": { "const": "dimension" },
+        "extensions": { "$ref": "#/$defs/values/extensions" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -30,7 +33,8 @@
     },
     "width": {
       "properties": {
-        "type": { "const": "dimension" }
+        "type": { "const": "dimension" },
+        "extensions": { "$ref": "#/$defs/values/extensions" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -38,7 +42,8 @@
     },
     "height": {
       "properties": {
-        "type": { "const": "dimension" }
+        "type": { "const": "dimension" },
+        "extensions": { "$ref": "#/$defs/values/extensions" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -46,7 +51,8 @@
     },
     "radius": {
       "properties": {
-        "type": { "const": "dimension" }
+        "type": { "const": "dimension" },
+        "extensions": { "$ref": "#/$defs/values/extensions" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -54,7 +60,8 @@
     },
     "shadow": {
       "properties": {
-        "type": { "const": "shadow" }
+        "type": { "const": "shadow" },
+        "extensions": { "type": "object" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/shadow"
@@ -62,7 +69,8 @@
     },
     "font": {
       "properties": {
-        "type": { "const": "font" }
+        "type": { "const": "font" },
+        "extensions": { "type": "object" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/font"
@@ -70,7 +78,8 @@
     },
     "font-size": {
       "properties": {
-        "type": { "const": "dimension" }
+        "type": { "const": "dimension" },
+        "extensions": { "$ref": "#/$defs/values/extensions" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/dimension"
@@ -78,7 +87,8 @@
     },
     "timing-function": {
       "properties": {
-        "type": { "const": "cubic-bezier" }
+        "type": { "const": "cubic-bezier" },
+        "extensions": { "type": "object" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/cubic-bezier"
@@ -86,7 +96,8 @@
     },
     "media": {
       "properties": {
-        "type": { "const": "media" }
+        "type": { "const": "media" },
+        "extensions": { "type": "object" }
       },
       "additionalProperties": {
         "$ref": "#/$defs/tokens/media"
