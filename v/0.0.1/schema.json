@@ -168,17 +168,15 @@
     },
     "tokens": {
       "media": {
-        "font": {
-          "$id": "#/$defs/tokens/media",
-          "type": "object",
-          "required": ["value"],
-          "properties": {
-            "type": { "const": "media" },
-            "value": { "$ref": "#/$defs/values/media" },
-            "extensions": { "type": "object" }
-          },
-          "additionalProperties": false
-        }
+        "$id": "#/$defs/tokens/media",
+        "type": "object",
+        "required": ["value"],
+        "properties": {
+          "type": { "const": "media" },
+          "value": { "$ref": "#/$defs/values/media" },
+          "extensions": { "type": "object" }
+        },
+        "additionalProperties": false
       },
       "font": {
         "$id": "#/$defs/tokens/font",
