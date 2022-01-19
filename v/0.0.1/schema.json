@@ -9,19 +9,39 @@
         "type": { "enum": ["color"], "default": "color" }
       },
       "additionalProperties": {
-        "$ref": "#/$defs/values/color"
+        "$ref": "#/$defs/wrappers/color"
       }
     }
   },
   "$defs": {
+    "wrappers": {
+      "color": {
+        "$id": "#/$defs/wrappers/color",
+        "additionalProperties": {
+          "oneOf": [{
+            "$ref": "#/$defs/values/color"
+          }, {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/$defs/wrappers/color"
+            }
+          }]
+        }
+      }
+    },
     "values": {
       "color": {
         "$id": "#/$defs/values/color",
         "description": "The value must be a string containing a hex triplet/quartet including the preceding # character",
-        "examples": ["#FFF"],
         "title": "The color value",
-        "pattern": "^#[0-9a-fA-F]{3,4,6,8}",
-        "type": "string"
+        "properties": {
+          "value": {
+            "examples": ["#FFF", "#FF0000"],
+            "pattern": "^#[0-9a-fA-F]{3,6}",
+            "type": "string",
+            "required": true
+          }
+        }
       },
       "cubic-bezier": {
         "$id": "#/$defs/values/cubic-bezier",
