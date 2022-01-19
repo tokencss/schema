@@ -114,7 +114,8 @@
           "offset-y": { "$ref": "#/$defs/values/dimension" },
           "blur": { "$ref": "#/$defs/values/dimension" },
           "spread": { "$ref": "#/$defs/values/dimension" },
-          "color": { "$ref": "#/$defs/values/color" }
+          "color": { "$ref": "#/$defs/values/color" },
+          "opacity": { "$ref": "#/$defs/values/numberClamped" }
         },
         "additionalProperties": false
       },
@@ -148,8 +149,8 @@
         "$id": "#/$defs/values/numberClamped",
         "title": "The number value",
         "type": "number",
-        "min": 0.0,
-        "max": 1.0
+        "minimum": 0,
+        "maximum": 1
       }
     },
     "tokens": {
