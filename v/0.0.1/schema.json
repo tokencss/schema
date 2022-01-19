@@ -120,29 +120,19 @@
       "type": "object",
       "oneOf": [
         {
-          "if": {
-            "properties": { "value": true }
-          },
-          "then": {
-            "$ref": "#/definitions/tokens/font",
-            "required": ["value"]
-          }
+          "$ref": "#/definitions/tokens/font",
+          "required": ["value"]
         },
         {
-          "if": {
-            "properties": { "value": false }
+          "type": "object",
+          "properties": {
+            "value": false
           },
-          "then": {
-            "type": "object",
-            "properties": {
-              "value": false
-            },
-            "patternProperties": {
-              "[\\{\\}\\.]*": false,
-              "[^\\{\\}\\.]*": { "$ref": "#/definitions/recursive-font" }
-            },
-            "additionalProperties": false
-          }
+          "patternProperties": {
+            "[\\{\\}\\.]*": false,
+            "[^\\{\\}\\.]*": { "$ref": "#/definitions/recursive-font" }
+          },
+          "additionalProperties": false
         }
       ]
     },
