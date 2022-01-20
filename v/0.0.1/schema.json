@@ -133,7 +133,8 @@
             "type": "object",
             "properties": {
               "type": { "const": "font" },
-              "extensions": { "$ref": "#/definitions/values/extensions" }
+              "extensions": { "$ref": "#/definitions/values/extensions" },
+              "value": false
             },
             "additionalProperties": { "$ref": "#/definitions/recursive-font" }
           }
