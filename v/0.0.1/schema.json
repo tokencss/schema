@@ -131,11 +131,11 @@
           },
           "else": {
             "type": "object",
-            "patternProperties": {
-              "[\\{\\}\\.]*": false,
-              "[^\\{\\}\\.]*": { "$ref": "#/definitions/recursive-font" }
+            "properties": {
+              "type": { "const": "font" },
+              "extensions": { "$ref": "#/definitions/values/extensions" }
             },
-            "additionalProperties": false
+            "additionalProperties": { "$ref": "#/definitions/recursive-font" }
           }
         }
       ]
