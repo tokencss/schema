@@ -111,36 +111,34 @@
       }
     },
     "test": {
-      "$ref": "#/definitions/recursive-font"
+      "oneOf": [{ "$ref": "#/definitions/recursive-font" }]
     }
   },
   "definitions": {
     "recursive-font": {
       "$id": "#/definitions/recursive-font",
-      "type": "object",
-      "if": {
-        "properties": {
-          "value": { "type": "array" }
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "required": ["value"],
+            "properties": {
+              "value": true
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/tokens/font"
+          },
+          "else": {
+            "type": "object",
+            "patternProperties": {
+              "[\\{\\}\\.]*": false,
+              "[^\\{\\}\\.]*": { "$ref": "#/definitions/recursive-font" }
+            },
+            "additionalProperties": false
+          }
         }
-      },
-      "then": {
-        "required": ["value"],
-        "properties": {
-          "value": { "$ref": "#/definitions/tokens/font" }
-        }
-      },
-      "else": {
-        "type": "object",
-        "properties": {
-          "value": false
-        },
-        "required": ["value"],
-        "patternProperties": {
-          "[\\{\\}\\.]*": false,
-          "[^\\{\\}\\.]*": { "$ref": "#/definitions/recursive-font" }
-        },
-        "additionalProperties": false
-      }
+      ]
     },
     "values": {
       "extensions": {
