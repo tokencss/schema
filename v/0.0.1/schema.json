@@ -270,7 +270,7 @@
         "minItems": 4,
         "maxItems": 4,
         "items": {
-          "$ref": "#/definitions/values/numberClamped"
+          "$ref": "#/definitions/values/number"
         }
       },
       "number": {
