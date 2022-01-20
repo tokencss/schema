@@ -4,107 +4,158 @@
   "title": "Token Config",
   "type": "object",
   "properties": {
-    "color": {
-      "properties": {
-        "type": { "const": "color" },
-        "extensions": { "type": "object" }
-      },
-      "additionalProperties": {
-        "anyOf": [
-          {
-            "type": "object"
-          },
-          {
-            "$ref": "#/definitions/tokens/color"
-          }
-        ]
-      }
-    },
-    "space": {
-      "properties": {
-        "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/definitions/values/extensions" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/dimension"
-      }
-    },
-    "size": {
-      "properties": {
-        "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/definitions/values/extensions" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/dimension"
-      }
-    },
-    "width": {
-      "properties": {
-        "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/definitions/values/extensions" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/dimension"
-      }
-    },
-    "height": {
-      "properties": {
-        "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/definitions/values/extensions" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/dimension"
-      }
-    },
-    "radius": {
-      "properties": {
-        "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/definitions/values/extensions" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/dimension"
-      }
-    },
-    "shadow": {
-      "properties": {
-        "type": { "const": "shadow" },
-        "extensions": { "type": "object" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/shadow"
-      }
-    },
+    "color": { "$ref": "#/definitions/wrappers/color" },
+    "space": { "$ref": "#/definitions/wrappers/dimension" },
+    "size": { "$ref": "#/definitions/wrappers/dimension" },
+    "width": { "$ref": "#/definitions/wrappers/dimension" },
+    "height": { "$ref": "#/definitions/wrappers/dimension" },
+    "radius": { "$ref": "#/definitions/wrappers/dimension" },
+    "shadow": { "$ref": "#/definitions/wrappers/shadow" },
     "font": { "$ref": "#/definitions/wrappers/font" },
-    "font-size": {
-      "properties": {
-        "type": { "const": "dimension" },
-        "extensions": { "$ref": "#/definitions/values/extensions" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/dimension"
-      }
-    },
-    "timing-function": {
-      "properties": {
-        "type": { "const": "cubic-bezier" },
-        "extensions": { "type": "object" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/cubic-bezier"
-      }
-    },
-    "media": {
-      "properties": {
-        "type": { "const": "media" },
-        "extensions": { "type": "object" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/media"
-      }
-    }
+    "font-size": { "$ref": "#/definitions/wrappers/dimension" },
+    "timing-function": { "$ref": "#/definitions/wrappers/cubic-bezier" },
+    "media": { "$ref": "#/definitions/wrappers/media" }
   },
   "definitions": {
     "wrappers": {
+      "media": {
+        "$id": "#/definitions/wrappers/media",
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": true
+              }
+            },
+            "then": {
+              "$ref": "#/definitions/tokens/media"
+            },
+            "else": {
+              "type": "object",
+              "properties": {
+                "type": { "const": "media" },
+                "extensions": { "type": "object" },
+                "value": false
+              },
+              "additionalProperties": {
+                "$ref": "#/definitions/wrappers/media"
+              }
+            }
+          }
+        ]
+      },
+      "cubic-bezier": {
+        "$id": "#/definitions/wrappers/cubic-bezier",
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": true
+              }
+            },
+            "then": {
+              "$ref": "#/definitions/tokens/cubic-bezier"
+            },
+            "else": {
+              "type": "object",
+              "properties": {
+                "type": { "const": "cubic-bezier" },
+                "extensions": { "type": "object" },
+                "value": false
+              },
+              "additionalProperties": {
+                "$ref": "#/definitions/wrappers/cubic-bezier"
+              }
+            }
+          }
+        ]
+      },
+      "shadow": {
+        "$id": "#/definitions/wrappers/shadow",
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": true
+              }
+            },
+            "then": {
+              "$ref": "#/definitions/tokens/shadow"
+            },
+            "else": {
+              "type": "object",
+              "properties": {
+                "type": { "const": "shadow" },
+                "extensions": { "type": "object" },
+                "value": false
+              },
+              "additionalProperties": {
+                "$ref": "#/definitions/wrappers/shadow"
+              }
+            }
+          }
+        ]
+      },
+      "color": {
+        "$id": "#/definitions/wrappers/color",
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": true
+              }
+            },
+            "then": {
+              "$ref": "#/definitions/tokens/color"
+            },
+            "else": {
+              "type": "object",
+              "properties": {
+                "type": { "const": "color" },
+                "extensions": { "type": "object" },
+                "value": false
+              },
+              "additionalProperties": { "$ref": "#/definitions/wrappers/color" }
+            }
+          }
+        ]
+      },
+      "dimension": {
+        "$id": "#/definitions/wrappers/dimension",
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": true
+              }
+            },
+            "then": {
+              "$ref": "#/definitions/tokens/dimension"
+            },
+            "else": {
+              "type": "object",
+              "properties": {
+                "type": { "const": "dimension" },
+                "extensions": { "$ref": "#/definitions/values/extensions" },
+                "value": false
+              },
+              "additionalProperties": {
+                "$ref": "#/definitions/wrappers/dimension"
+              }
+            }
+          }
+        ]
+      },
       "font": {
         "$id": "#/definitions/wrappers/font",
         "allOf": [
