@@ -74,15 +74,7 @@
         "$ref": "#/definitions/tokens/shadow"
       }
     },
-    "font": {
-      "properties": {
-        "type": { "const": "font" },
-        "extensions": { "type": "object" }
-      },
-      "additionalProperties": {
-        "$ref": "#/definitions/tokens/font"
-      }
-    },
+    "font": { "$ref": "#/definitions/wrappers/font" },
     "font-size": {
       "properties": {
         "type": { "const": "dimension" },
@@ -109,37 +101,36 @@
       "additionalProperties": {
         "$ref": "#/definitions/tokens/media"
       }
-    },
-    "test": {
-      "oneOf": [{ "$ref": "#/definitions/recursive-font" }]
     }
   },
   "definitions": {
-    "recursive-font": {
-      "$id": "#/definitions/recursive-font",
-      "allOf": [
-        {
-          "if": {
-            "type": "object",
-            "required": ["value"],
-            "properties": {
-              "value": true
-            }
-          },
-          "then": {
-            "$ref": "#/definitions/tokens/font"
-          },
-          "else": {
-            "type": "object",
-            "properties": {
-              "type": { "const": "font" },
-              "extensions": { "$ref": "#/definitions/values/extensions" },
-              "value": false
+    "wrappers": {
+      "font": {
+        "$id": "#/definitions/wrappers/font",
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": true
+              }
             },
-            "additionalProperties": { "$ref": "#/definitions/recursive-font" }
+            "then": {
+              "$ref": "#/definitions/tokens/font"
+            },
+            "else": {
+              "type": "object",
+              "properties": {
+                "type": { "const": "font" },
+                "extensions": { "$ref": "#/definitions/values/extensions" },
+                "value": false
+              },
+              "additionalProperties": { "$ref": "#/definitions/wrappers/font" }
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "values": {
       "extensions": {
