@@ -12,7 +12,10 @@
     "radius": { "$ref": "#/definitions/wrappers/dimension" },
     "shadow": { "$ref": "#/definitions/wrappers/shadow" },
     "font": { "$ref": "#/definitions/wrappers/font" },
-    "font-size": { "$ref": "#/definitions/wrappers/dimension" },
+    "fontSize": { "$ref": "#/definitions/wrappers/dimension" },
+    "fontWeight": { "$ref": "#/definitions/wrappers/number" },
+    "lineHeight": { "$ref": "#/definitions/wrappers/number" },
+    "letterSpacing": { "$ref": "#/definitions/wrappers/dimension" },
     "timing-function": { "$ref": "#/definitions/wrappers/cubic-bezier" },
     "media": { "$ref": "#/definitions/wrappers/media" }
   },
@@ -181,6 +184,32 @@
             }
           }
         ]
+      },
+      "number": {
+        "$id": "#/definitions/wrappers/number",
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": true
+              }
+            },
+            "then": {
+              "$ref": "#/definitions/tokens/number"
+            },
+            "else": {
+              "type": "object",
+              "properties": {
+                "type": { "const": "number" },
+                "extensions": { "$ref": "#/definitions/values/extensions" },
+                "value": false
+              },
+              "additionalProperties": { "$ref": "#/definitions/wrappers/number" }
+            }
+          }
+        ]
       }
     },
     "values": {
@@ -190,7 +219,7 @@
         "type": "object",
         "properties": {
           "com.tokencss.scale": {
-            "enum": ["space", "size", "width", "height", "radius", "font-size"]
+            "enum": ["space", "size", "width", "height", "radius", "fontSize", "fontWeight", "lineHeight", "letterSpacing"]
           }
         }
       },
@@ -353,7 +382,7 @@
         "required": ["value"],
         "properties": {
           "value": { "$ref": "#/definitions/values/number" },
-          "extensions": { "type": "object" }
+          "extensions": { "$ref": "#/definitions/values/extensions" }
         }
       }
     }
