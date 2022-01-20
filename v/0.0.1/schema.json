@@ -120,10 +120,11 @@
       "type": "object",
       "if": {
         "properties": {
-          "value": true
+          "value": { "type": "array" }
         }
       },
       "then": {
+        "required": ["value"],
         "properties": {
           "value": { "$ref": "#/definitions/tokens/font" }
         }
