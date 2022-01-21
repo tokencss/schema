@@ -242,6 +242,7 @@
         "$id": "#/definitions/values/shadow",
         "title": "The shadow value",
         "type": "object",
+        "required": ["offset-x", "offset-y", "blur", "color"],
         "properties": {
           "offset-x": { "$ref": "#/definitions/values/dimension" },
           "offset-y": { "$ref": "#/definitions/values/dimension" },
