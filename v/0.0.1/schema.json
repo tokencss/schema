@@ -4,7 +4,7 @@
   "title": "Token Config",
   "type": "object",
   "properties": {
-    "extends": { "type": "array", "items": { "type": "string" } },
+    "extends": { "$ref": "#/definitions/values/extends" },
     "color": { "$ref": "#/definitions/wrappers/color" },
     "space": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
     "size": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
@@ -16,7 +16,9 @@
     "font-size": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
     "font-weight": { "$ref": "#/definitions/wrappers/number" },
     "line-height": { "$ref": "#/definitions/wrappers/number" },
-    "letter-spacing": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
+    "letter-spacing": {
+      "$ref": "#/definitions/wrappers/maybe-fluid-dimension"
+    },
     "easing": { "$ref": "#/definitions/wrappers/cubic-bezier" },
     "media": { "$ref": "#/definitions/wrappers/media" }
   },
@@ -135,9 +137,9 @@
       "maybe-fluid-dimension": {
         "$id": "#/definitions/wrappers/maybe-fluid-dimension",
         "oneOf": [
-        { "$ref": "#/definitions/wrappers/dimension" },
-        { "$ref": "#/definitions/wrappers/dimension-fluid" }
-      ]
+          { "$ref": "#/definitions/wrappers/dimension" },
+          { "$ref": "#/definitions/wrappers/dimension-fluid" }
+        ]
       },
       "dimension-fluid": {
         "$id": "#/definitions/wrappers/dimension-fluid",
@@ -251,6 +253,11 @@
       }
     },
     "values": {
+      "extends": {
+        "$id": "#/definitions/values/extends",
+        "type": "array",
+        "items": { "type": "string" }
+      },
       "extensions": {
         "$id": "#/definitions/values/extensions",
         "title": "The extensions value",
