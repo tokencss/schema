@@ -136,9 +136,22 @@
       },
       "maybe-fluid-dimension": {
         "$id": "#/definitions/wrappers/maybe-fluid-dimension",
-        "oneOf": [
-          { "$ref": "#/definitions/wrappers/dimension" },
-          { "$ref": "#/definitions/wrappers/dimension-fluid" }
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": { "type": "string" }
+              }
+            },
+            "then": {
+              "$ref": "#/definitions/tokens/dimension"
+            },
+            "else": {
+              "$ref": "#/definitions/wrappers/dimension-fluid"
+            }
+          }
         ]
       },
       "dimension-fluid": {
