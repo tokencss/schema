@@ -286,7 +286,7 @@
         "$id": "#/definitions/values/dimension",
         "title": "The dimension value",
         "type": "string",
-        "pattern": "((px|r?em|v[wh])$|^\\{.*\\})$"
+        "pattern": "((px|r?em|v[wh]|%)$|^\\{.*\\})$"
       },
       "color": {
         "$id": "#/definitions/values/color",
