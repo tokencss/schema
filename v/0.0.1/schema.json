@@ -162,7 +162,7 @@
               "type": "object",
               "required": ["value"],
               "properties": {
-                "value": true
+                "value": { "type": "object" }
               }
             },
             "then": {
@@ -190,7 +190,7 @@
               "type": "object",
               "required": ["value"],
               "properties": {
-                "value": true
+                "value": { "type": "string" }
               }
             },
             "then": {
