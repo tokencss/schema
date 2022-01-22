@@ -6,18 +6,18 @@
   "properties": {
     "extends": { "$ref": "#/definitions/values/extends" },
     "color": { "$ref": "#/definitions/wrappers/color" },
-    "space": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
-    "size": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
-    "width": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
-    "height": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
-    "radius": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
+    "space": { "$ref": "#/definitions/wrappers/dimension" },
+    "size": { "$ref": "#/definitions/wrappers/dimension" },
+    "width": { "$ref": "#/definitions/wrappers/dimension" },
+    "height": { "$ref": "#/definitions/wrappers/dimension" },
+    "radius": { "$ref": "#/definitions/wrappers/dimension" },
     "shadow": { "$ref": "#/definitions/wrappers/shadow" },
     "font": { "$ref": "#/definitions/wrappers/font" },
-    "font-size": { "$ref": "#/definitions/wrappers/maybe-fluid-dimension" },
+    "font-size": { "$ref": "#/definitions/wrappers/dimension" },
     "font-weight": { "$ref": "#/definitions/wrappers/number" },
     "line-height": { "$ref": "#/definitions/wrappers/number" },
     "letter-spacing": {
-      "$ref": "#/definitions/wrappers/maybe-fluid-dimension"
+      "$ref": "#/definitions/wrappers/dimension"
     },
     "easing": { "$ref": "#/definitions/wrappers/cubic-bezier" },
     "media": { "$ref": "#/definitions/wrappers/media" }
@@ -134,54 +134,6 @@
           }
         ]
       },
-      "maybe-fluid-dimension": {
-        "$id": "#/definitions/wrappers/maybe-fluid-dimension",
-        "allOf": [
-          {
-            "if": {
-              "type": "object",
-              "required": ["value"],
-              "properties": {
-                "value": { "type": "string" }
-              }
-            },
-            "then": {
-              "$ref": "#/definitions/tokens/dimension"
-            },
-            "else": {
-              "$ref": "#/definitions/wrappers/dimension-fluid"
-            }
-          }
-        ]
-      },
-      "dimension-fluid": {
-        "$id": "#/definitions/wrappers/dimension-fluid",
-        "allOf": [
-          {
-            "if": {
-              "type": "object",
-              "required": ["value"],
-              "properties": {
-                "value": { "type": "object" }
-              }
-            },
-            "then": {
-              "$ref": "#/definitions/tokens/dimension-fluid"
-            },
-            "else": {
-              "type": "object",
-              "properties": {
-                "type": { "const": "dimension-fluid" },
-                "extensions": { "$ref": "#/definitions/values/extensions" },
-                "value": false
-              },
-              "additionalProperties": {
-                "$ref": "#/definitions/wrappers/dimension-fluid"
-              }
-            }
-          }
-        ]
-      },
       "dimension": {
         "$id": "#/definitions/wrappers/dimension",
         "allOf": [
@@ -276,6 +228,15 @@
         "title": "The extensions value",
         "type": "object",
         "properties": {
+          "com.tokencss.fluid": {
+            "type": "object",
+            "properties": {
+              "min": { "$ref": "#/definitions/values/dimension" },
+              "max": { "$ref": "#/definitions/values/dimension" },
+              "easing": { "$ref": "#/definitions/values/cubic-bezier" }
+            },
+            "additionalProperties": false
+          },
           "com.tokencss.scale": {
             "enum": [
               "space",
@@ -321,15 +282,6 @@
         },
         "additionalProperties": false
       },
-      "dimension-fluid": {
-        "$id": "#/definitions/values/dimension-fluid",
-        "title": "The fluid dimension value",
-        "properties": {
-          "min": { "$ref": "#/definitions/values/dimension" },
-          "max": { "$ref": "#/definitions/values/dimension" },
-          "easing": { "$ref": "#/definitions/values/cubic-bezier" }
-        }
-      },
       "dimension": {
         "$id": "#/definitions/values/dimension",
         "title": "The dimension value",
@@ -344,12 +296,25 @@
       },
       "cubic-bezier": {
         "$id": "#/definitions/values/cubic-bezier",
+        "type": ["string", "array"],
         "title": "The cubic-bezier value",
-        "minItems": 4,
-        "maxItems": 4,
-        "items": {
-          "$ref": "#/definitions/values/number"
-        }
+        "allOf": [
+          {
+            "if": { "type": "string" },
+            "then": {
+              "type": "string",
+              "pattern": "^\\{.*\\}$"
+            },
+            "else": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "$ref": "#/definitions/values/number"
+              }   
+            }
+          }
+        ]
       },
       "number": {
         "$id": "#/definitions/values/number",
@@ -409,17 +374,6 @@
           "type": { "consts": "color" },
           "value": { "$ref": "#/definitions/values/color" },
           "extensions": { "type": "object" }
-        },
-        "additionalProperties": false
-      },
-      "dimension-fluid": {
-        "$id": "#/definitions/tokens/dimension-fluid",
-        "type": "object",
-        "required": ["value"],
-        "properties": {
-          "type": { "const": "dimension-fluid" },
-          "value": { "$ref": "#/definitions/values/dimension-fluid" },
-          "extensions": { "$ref": "#/definitions/values/extensions" }
         },
         "additionalProperties": false
       },
